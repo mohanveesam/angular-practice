@@ -1,0 +1,38 @@
+<div class="p-3">
+  <div class="d-flex align-items-center justify-content-between">
+    <h5 mat-dialog-title>{{ mode === 'E' ? 'Edit User' : 'Add User' }}</h5>
+    <div (click)="onCancel()" style="cursor: pointer;" matTooltip="Close">
+      <mat-icon>cancel</mat-icon>
+    </div>
+  </div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appeacloseDialogrance="outline" floatLabel="always" class="w-100 mt-3">
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="fullname" type="text" />
+    </mat-form-field>
+
+    <mat-form-field appeacloseDialogrance="outline" floatLabel="always" class="w-100 mt-3">
+      <mat-label>User Name</mat-label>
+      <input matInput formControlName="username" type="text" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100 mt-3">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+    <button type="button" class="me-2 pb-2 btn btn-light" matTooltip="Cancel" (click)="onCancel()"><mat-icon class="pt-2">close</mat-icon>Cancel</button>
+    <button class="btn btn-primary" type="submit" [matTooltip]="mode === 'E' ? 'Update' : 'Submit'"><mat-icon class="pt-1">done_all</mat-icon>
+        {{ mode === 'E' ? 'Update' : 'Submit' }}
+    </button>
+    </div>
+  </form>
+
+</div>
