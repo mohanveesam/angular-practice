@@ -112,3 +112,34 @@ table {
   overflow-y: auto !important;          /* Enable vertical scroll */
   overflow-x: hidden !important;        /* Prevent sideways scroll */
 }
+
+/* for formfields */
+.small-field .mat-mdc-form-field-flex {
+  height: 36px;              /* smaller height */
+  /* padding: 0 8px;            side padding  */
+  align-items: center;       /* vertically center the input */
+}
+
+.small-field input.mat-mdc-input-element {
+  padding: 2px 0;            /* reduce inner padding */
+  font-size: 14px;
+  line-height: 20px;         /* keeps cursor centered */
+}
+
+.small-field .mat-mdc-form-field-infix {
+  min-height: 30px;          /* ensure enough room for text cursor */
+}
+
+.mat-drawer-inner-container {
+  width: 100%;
+  height: 100%;
+}
+
+.mat-header-row {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #1976d2;
+  color: white;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+}

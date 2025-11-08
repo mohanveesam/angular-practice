@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { UserFormComponent } from './user-form/user-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonService } from '../../services/common.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-user',
@@ -11,18 +13,23 @@ import { CommonService } from '../../services/common.service';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  users : any[] = [];
+  users = new MatTableDataSource<any>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator; 
+
   constructor(private dialog : MatDialog, private cs: CommonService){
 
   }
-  displayedColumns: string[] = ['fullname', 'username', 'actions'];
+  displayedColumns: string[] = ['fullname', 'username', 'userrole', 'actions'];
 
   getAllUsers() {
     this.cs.getAll('users').subscribe((res: any) => {
-      this.users = res;
+      // this.users = res;
+      this.users = new MatTableDataSource(res);
+      this.users.paginator = this.paginator;
+      
     });
   }
-    ngOnInit() {
+  ngOnInit() {
     this.getAllUsers();
   }
 
@@ -53,7 +60,11 @@ export class UserComponent {
       }
     });
   }
-}
+  }
+
+  // ngAfterViewInit() {
+  //   this.users.paginator = this.paginator;  // ✅ Attach paginator after view init
+  // }
 
 
 }

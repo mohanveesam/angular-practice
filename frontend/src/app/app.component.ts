@@ -53,4 +53,8 @@ export class AppComponent implements OnInit{
     localStorage.clear();
     this.router.navigate(['/components/login']);
   }
+  openProfile(){
+
+  }
+
 }

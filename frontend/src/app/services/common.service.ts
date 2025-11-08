@@ -6,8 +6,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommonService {
+  roles = [ { id: 1, name: 'Admin' },  { id: 2, name: 'Manager' },  { id: 3, name: 'User' }]; 
 
-  public apiUrl = 'http://localhost:5000/api';
+  public apiUrl = 'http://localhost:5204/api';
   
   constructor(private http:HttpClient){}
 
