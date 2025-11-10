@@ -40,7 +40,7 @@ export class UserFormComponent {
     if (!formValue.password) delete formValue.password;
 
     if (this.mode === 'E') {
-      this.cs.put('users', this.data.user._id, formValue).subscribe({
+      this.cs.patch('users', this.data.user._id, formValue).subscribe({
         next: () => {
           this.snackBar.open('User updated successfully!', 'Close', {
             duration: 3000,

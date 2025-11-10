@@ -17,7 +17,7 @@ export class UserComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
   constructor(private dialog : MatDialog, private cs: CommonService){
-
+    
   }
   displayedColumns: string[] = ['fullname', 'username', 'userrole', 'actions'];
 

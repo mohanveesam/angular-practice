@@ -6,6 +6,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommonService {
+  // getById(arg0: string, userId: string | null) {
+  //   throw new Error('Method not implemented.');
+  // }
   roles = [ { id: 1, name: 'Admin' },  { id: 2, name: 'Manager' },  { id: 3, name: 'User' }]; 
 
   public apiUrl = 'http://localhost:5204/api';
@@ -20,8 +23,12 @@ export class CommonService {
     return this.http.post(`${this.apiUrl}/${entity}`, data);
   }
 
-  put(entity: string, id: string, data: any) {
-    return this.http.put(`${this.apiUrl}/${entity}/${id}`, data);
+  patch(entity: string, id: string, data: any) {
+    return this.http.patch(`${this.apiUrl}/${entity}/${id}`, data);
+  }
+
+  getById(entity: string, id: string) {
+    return this.http.get(`${this.apiUrl}/${entity}/${id}`);
   }
 
   delete(entity: string, id: string) {
