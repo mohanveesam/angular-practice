@@ -28,44 +28,11 @@ exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
-
-    // ✅ Handle password hashing manually
-    if (updateData.password) {
-      const hashed = await bcrypt.hash(updateData.password, 10);
-      updateData.password = hashed;
-    }
-    // If image uploaded, add image URL to update data
-    if (req.file) {
-      updateData.imageUrl = `/uploads/${req.file.filename}`;
-    } else if (req.body.imageUrl === "") {
-      updateData.imageUrl = "";
-    }
-    // To delete File from folder
-    if (req.body.imageUrl === "") {
-      const user = await User.findById(id);
-
-      if (user && user.imageUrl) {
-        const oldImagePath = path.join(__dirname, "..", user.imageUrl);
-
-        // check if file exists before deleting
-        if (fs.existsSync(oldImagePath)) {
-          fs.unlinkSync(oldImagePath);
-          console.log("🗑️ Deleted old image:", oldImagePath);
-        } else {
-          console.log("⚠️ Image file not found:", oldImagePath);
-        }
-      }
-
-      updateData.imageUrl = "";
-    }
-
     // Only updates provided fields (partial update)
     const user = await User.findByIdAndUpdate(id, updateData, { new: true });
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
     res.json({
       message: "User updated successfully",
       user: user,
