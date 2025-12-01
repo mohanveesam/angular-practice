@@ -143,3 +143,12 @@ table {
   color: white;
   box-shadow: 0 2px 3px rgba(0,0,0,0.15);
 }
+
+.profile-picture img {
+  object-fit: cover;
+  border: 2px solid #1976d2;
+}
+
+.profile-picture button {
+  padding: 3px 6px;
+}

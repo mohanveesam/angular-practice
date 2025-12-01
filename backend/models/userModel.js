@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
   fullname: { type: String },
   username: { type: String, unique: true },
   password: { type: String },
-  role: { type: Number,}
+  role: { type: Number},
+  imageUrl: { type: String },
 });
 
 // Hash password before creating a new user
@@ -18,13 +19,16 @@ userSchema.pre("save", async function (next) {
 // Hash password before updating a user
 userSchema.pre("findOneAndUpdate", async function (next) {
   const update = this.getUpdate();
-
-  if (update.password) {
+    if (!update || !update.password) {
+    return next();
+    }
+  try {
     const hashed = await bcrypt.hash(update.password, 10);
     this.setUpdate({ ...update, password: hashed });
+    next();
+  } catch (err) {
+    next(err);
   }
-
-  next();
 });
 
 module.exports = mongoose.model("User", userSchema);
