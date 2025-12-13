@@ -1,0 +1,49 @@
+<div class="p-3">
+  <form [formGroup]="profileform" (ngSubmit)="onSubmit()">
+    <div class="row mx-0">
+      <div class="col-6">
+        <mat-form-field class="full-width">
+          <mat-label>Phone</mat-label>
+          <input type="text" matInput formControlName="phone" />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input type="text" matInput formControlName="email" />
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <div class="avatar" (click)="fileInput.click()">
+          <img
+            [src]="imagePreview || 'profileimg.png'"
+            width="150"
+            height="150"
+          />
+          <span class="edit"><button><mat-icon class="pt-1" >edit</mat-icon></button></span>
+        </div>
+
+        <input
+          type="file"
+          #fileInput
+          hidden
+          accept="image/*"
+          (change)="onFileSelect($event)"
+        />
+      </div>
+    </div>
+
+    <div>
+      <button
+        type="button"
+        class="me-2 pb-2 btn btn-light"
+        matTooltip="Cancel"
+        (click)="onCancel()"
+      >
+        <mat-icon class="pt-2">close</mat-icon>Cancel
+      </button>
+      <button class="btn btn-primary" type="submit">
+        <mat-icon class="pt-1">done_all</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>
