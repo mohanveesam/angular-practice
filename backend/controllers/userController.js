@@ -1,12 +1,35 @@
 const User = require("../models/userModel");
+const Employee = require("../models/employeeModel");
 const bcrypt = require("bcryptjs");
 
 // Add user
+// exports.post = async (req, res) => {
+//   try {
+//     const newuser = new User(req.body);
+//     await newuser.save();
+//     res.status(201).json(newuser);
+//   } catch (error) {
+//     console.error("Error creating user:", error);
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
 exports.post = async (req, res) => {
   try {
-    const newuser = new User(req.body);
-    await newuser.save();
-    res.status(201).json(newuser);
+    // 1️⃣ Create user
+    const newUser = new User(req.body);
+    await newUser.save();
+
+    // 2️⃣ Create employee automatically (IMPORTANT)
+    await Employee.create({
+      userId: newUser._id,   // ✅ ObjectId (correct)
+      phone: "",
+      email: ""
+    });
+
+    // 3️⃣ Respond
+    res.status(201).json(newUser);
+
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(400).json({ error: error.message });

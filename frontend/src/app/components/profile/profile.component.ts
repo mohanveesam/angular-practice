@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   profileform!: FormGroup;
   selectedFile!: File;
   imagePreview: string | null = null;
+  
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
@@ -27,11 +28,14 @@ export class ProfileComponent implements OnInit {
       imageUrl: [this.data?.imageUrl || null],
     });
     if (this.data?.imageUrl) {
-      this.imagePreview = this.data.imageUrl;
+      // this.imagePreview = this.data.imageUrl;
+      this.imagePreview = `http://localhost:5204${this.data.imageUrl}`;
+
     }
   }
 
   onSubmit() {
+    
     const formData = new FormData();
     formData.append('phone', this.profileform.value.phone);
     formData.append('email', this.profileform.value.email);
@@ -40,7 +44,7 @@ export class ProfileComponent implements OnInit {
       formData.append('image', this.selectedFile);
     }
     this.cs
-      .patch('employee', `${this.data.userId}`, this.profileform.value)
+      .patch('employee', `${this.data.userId}`, formData)
       .subscribe((res) => {
         this.dialogRef.close(res);
       });

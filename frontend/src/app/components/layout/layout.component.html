@@ -1,12 +1,12 @@
-<!-- <ng-container *ngIf="!isAuthPage(); else authContent">
+<ng-container>
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav mode="side" opened class="custom-sidenav">
-      Logo at top
+      <!-- Logo at top -->
       <div class="logo">
         <img src="logo.png" alt="Logo" style="width: 200px; height: 100px" />
       </div>
 
-      Navigation links
+      <!-- Navigation links -->
       <div style="height: 66vh">
         <mat-nav-list>
           <a mat-list-item routerLink="/components/dashboard" routerLinkActive="active-link"
@@ -15,19 +15,19 @@
           </a>
           <a
             mat-list-item
-            *ngIf="role == 1 || 2"
+            *ngIf="role === 1 || role === 2"
             routerLink="/components/user"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
           >
             🧑‍💼 Users
           </a>
-          Add more component links here
+          <!-- Add more component links here -->
         </mat-nav-list>
       </div>
-      Logout at bottom
+      <!-- Logout at bottom -->
       <div class="text-center mt-3">
-        Profile row
+        <!-- Profile row -->
         <div class="px-3 d-flex align-items-center gap-5">
           <img  [src]="profileImage" alt="Profile" class="rounded-circle border" width="50" height="50" (click)="openProfile()"/>
           <button
@@ -37,7 +37,7 @@
           </button>
         </div>
 
-        Welcome text
+        <!-- Welcome text -->
         <div *ngIf="fullname" class="mt-2">
           👋 Welcome,<br />
           <strong>{{ fullname }}</strong>
@@ -53,9 +53,3 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </ng-container>
-
-Auth Pages without sidenav
-<ng-template #authContent>
-  <router-outlet></router-outlet>
-</ng-template> -->
-<router-outlet></router-outlet>

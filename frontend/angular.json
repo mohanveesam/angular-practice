@@ -55,7 +55,14 @@
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "production",
+"vite": {
+  "optimizeDeps": {
+    "exclude": ["."]
+  }
+}
+
+
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -67,7 +74,14 @@
               "buildTarget": "myapp:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+"vite": {
+  "optimizeDeps": {
+    "exclude": ["."]
+  }
+}
+
+
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

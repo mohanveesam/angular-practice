@@ -1,25 +1,19 @@
-// app.routes.ts
 import { Routes } from '@angular/router';
 import { provideRouter } from '@angular/router';
-import { UserComponent } from './components/user/user.component';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'components/login',  // Optional default route
-    pathMatch: 'full'
-  },
+  { path: 'login', component: LoginComponent },
   {
     path: 'components',
-    children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'dashboard', component: DashboardComponent,},
-      { path: 'user', component: UserComponent, canActivate: [authGuard], data: { roles: [1] } },  
-    ]
-  }
+    // canActivate: [authGuard],
+    // data: { roles: [1, 2] },
+    loadChildren: () =>
+      import('./components/components.routes').then(m => m.COMPONENTS_ROUTES),
+  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' },
 ];
 
 export const appRouterProviders = [provideRouter(routes)];

@@ -44,5 +44,5 @@ exports.login = async (req, res) => {
     console.error("Login error:", error);  // IMPORTANT for debugging
     res.status(500).json({ message: "Server error", error: error.message });
   }
-  console.log(fullname)
+  // console.log(fullname)
 };

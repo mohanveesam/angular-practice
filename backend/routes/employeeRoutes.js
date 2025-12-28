@@ -5,6 +5,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const upload = require('../middleware/upload');
 
 router.get("/:id", getEmployee);
-router.patch("/:id", upload.single('image'), updateEmployee);
+// router.patch("/:id", upload.single('image'), updateEmployee);
+router.patch("/:id", upload.single("image"), updateEmployee);
 
 module.exports = router;
